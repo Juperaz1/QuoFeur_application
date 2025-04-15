@@ -1,5 +1,6 @@
-import android.os.Bundle;
+package com.example.ppe1;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,10 +28,9 @@ public class MainActivity extends AppCompatActivity {
                 if (firstName.isEmpty() || lastName.isEmpty() || password.isEmpty()) {
                     Toast.makeText(MainActivity.this, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show();
                 } else {
-
                     Toast.makeText(MainActivity.this, "Connexion en cours", Toast.LENGTH_SHORT).show();
-                    }
                 }
+            }
         });
     }
 }
