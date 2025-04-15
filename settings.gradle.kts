@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PPE1"
+rootProject.name = "PPE"
 include(":app")
  

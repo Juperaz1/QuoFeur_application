@@ -3,12 +3,12 @@ plugins {
 }
 
 android {
-    namespace = "com.example.ppe1"
+    namespace = "com.example.ppe"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.ppe1"
-        minSdk = 29
+        applicationId = "com.example.ppe"
+        minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
