@@ -37,7 +37,7 @@ public class UserDetailsActivity extends AppCompatActivity {
 
     public void requestDetails(){
 
-        String url="http://localhost/~justine.loiseau/PPE-/public/";
+        String url="http://localhost/PPE-/public/";
         StringRequest req =new StringRequest(Request.Method.GET,url,this::processDetails,this::handleErrors){
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
