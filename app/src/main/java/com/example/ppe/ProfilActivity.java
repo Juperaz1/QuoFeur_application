@@ -11,13 +11,13 @@ public class ProfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
 
-        // Trouver les TextViews dans le layout
+
         TextView tvNom = findViewById(R.id.tvNom);
         TextView tvPrenom = findViewById(R.id.tvPrenom);
         TextView tvPoints = findViewById(R.id.tvPoints);
         TextView tvHistorique = findViewById(R.id.tvHistorique);
 
-        // Simuler des informations utilisateur (ces données peuvent venir de la base de données ou d'un autre endroit)
+
         String nom = "Dupont";
         String prenom = "Jean";
         String points = "150 points";
