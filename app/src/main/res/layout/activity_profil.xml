@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Affichage du nom -->
+    <TextView
+        android:id="@+id/tvNom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nom : "
+        android:textSize="18sp" />
+
+    <!-- Affichage du prénom -->
+    <TextView
+        android:id="@+id/tvPrenom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Prénom : "
+        android:textSize="18sp" />
+
+    <!-- Affichage des points -->
+    <TextView
+        android:id="@+id/tvPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Points : "
+        android:textSize="18sp" />
+
+    <!-- Affichage de l'historique -->
+    <TextView
+        android:id="@+id/tvHistorique"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Historique : "
+        android:textSize="18sp" />
+
+</LinearLayout>

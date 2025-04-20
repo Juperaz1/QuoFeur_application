@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <!-- Choisir un coiffeur -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choisir un coiffeur : "
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/spinnerCoiffeur"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Choisir une prestation -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choisir une prestation : "
+        android:textSize="18sp" />
+
+    <Spinner
+        android:id="@+id/spinnerPrestation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!-- Choisir une date -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choisir la date : "
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/etDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="JJ/MM/AAAA"
+        android:inputType="date" />
+
+    <!-- Choisir une heure -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choisir l'heure : "
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/etHeure"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="HH:MM"
+        android:inputType="time" />
+
+    <!-- Bouton pour confirmer la prise de RDV -->
+    <Button
+        android:id="@+id/btnConfirmerRDV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Confirmer le RDV" />
+
+</LinearLayout>
