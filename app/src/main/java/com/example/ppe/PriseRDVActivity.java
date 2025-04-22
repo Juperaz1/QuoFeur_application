@@ -87,7 +87,7 @@ public class PriseRDVActivity extends AppCompatActivity {
         return date.matches("\\d{2}/\\d{2}/\\d{4}");
     }
 
-    // Méthode pour vérifier si l'heure est valide (format "HH:mm")
+
     private boolean isValidTime(String time) {
         return time.matches("\\d{2}:\\d{2}");
     }

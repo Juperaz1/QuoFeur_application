@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.ppe">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
 
     <application
         android:usesCleartextTraffic="true"
@@ -30,12 +33,10 @@
             android:name=".MenuActivity"
             android:exported="true" />
 
-        <!-- Activité Profil -->
         <activity
             android:name=".ProfilActivity"
             android:exported="true" />
 
-        <!-- Activité Prise de RDV -->
         <activity
             android:name=".PriseRDVActivity"
             android:exported="true" />

@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loginUser() {
-        String url = "http://192.168.1.30/PPE-/public/login";
+        String url = "http://192.168.0.111/~justine.loiseau/PPE-/public/login";
 
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
             Log.d("LOGIN_RESPONSE", response);
