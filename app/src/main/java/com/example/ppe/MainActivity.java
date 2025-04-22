@@ -13,9 +13,10 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
-
+import android.util.Log;
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,58 +28,53 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         etFirstName = findViewById(R.id.etFirstName);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
 
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loginUser();
-            }
-        });
+        btnLogin.setOnClickListener(v -> loginUser());
     }
 
-
     private void loginUser() {
-
-        String url = "http://localhost/PPE-/public/login";
+        String url = "http://192.168.1.30/PPE-/public/login";
 
         StringRequest request = new StringRequest(Request.Method.POST, url, response -> {
+            Log.d("LOGIN_RESPONSE", response);
             try {
-
                 JSONObject obj = new JSONObject(response);
-                String token = obj.getJSONObject("data").getString("token");
-                int userId = obj.getJSONObject("data").getInt("id_utilisateur");
+                String token = obj.getString("access_token");
+                String message = obj.getString("message");
+                JSONObject userObj = obj.getJSONObject("user");
+                int userId = userObj.getInt("id_utilisateur");
 
+                if (message.equals("Utilisateur authentifié avec succès")) {
+                    SharedPreferences prefs = getSharedPreferences("app", MODE_PRIVATE);
+                    prefs.edit().putString("jwt", token).putInt("user_id", userId).apply();
 
-                SharedPreferences prefs = getSharedPreferences("app", MODE_PRIVATE);
-                prefs.edit().putString("jwt", token).putInt("id_utilisateur", userId).apply();
-
-
-                Intent intent = new Intent(MainActivity.this, MenuActivity.class);
-                startActivity(intent);
-                finish();
+                    Intent intent = new Intent(MainActivity.this, MenuActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Le login a échoué", Toast.LENGTH_SHORT).show();
+                }
             } catch (JSONException e) {
-                Toast.makeText(MainActivity.this, "Erreur parsing de la réponse", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Erreur de parsing JSON", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
             }
         }, error -> {
-
-            Toast.makeText(MainActivity.this, "Login échoué, vérifiez vos informations", Toast.LENGTH_SHORT).show();
+            error.printStackTrace();
+            Log.e("VOLLEY_ERROR", "Erreur réseau : " + error.toString());
+            Toast.makeText(getApplicationContext(), "Erreur réseau", Toast.LENGTH_SHORT).show();
         }) {
             @Override
             protected Map<String, String> getParams() {
-
-                Map<String, String> params = new HashMap<>();
-                params.put("login", etFirstName.getText().toString());
-                params.put("password", etPassword.getText().toString());
-                return params;
+                Map<String, String> map = new HashMap<>();
+                map.put("pseudo_utilisateur", etFirstName.getText().toString());
+                map.put("mdp_utilisateur", etPassword.getText().toString());
+                return map;
             }
         };
 
-        // Ajouter la requête à la file d'attente de Volley pour exécution
         Volley.newRequestQueue(this).add(request);
     }
 }

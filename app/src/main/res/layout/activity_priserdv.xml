@@ -5,77 +5,46 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Prise de rendez-vous"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="32dp"/>
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Choisir un coiffeur : "
-        android:textSize="18sp" />
 
     <Spinner
         android:id="@+id/spinnerCoiffeur"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choisir une prestation : "
-        android:textSize="18sp" />
+        android:hint="Choisissez un coiffeur"/>
+
 
     <Spinner
         android:id="@+id/spinnerPrestation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Choisir la date : "
-        android:textSize="18sp" />
+        android:hint="Choisissez une prestation"/>
+
 
     <EditText
         android:id="@+id/etDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="JJ/MM/AAAA"
-        android:inputType="date" />
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Choisir l'heure : "
-        android:textSize="18sp" />
+        android:hint="Date (dd/MM/yyyy)"
+        android:inputType="date"/>
 
     <EditText
         android:id="@+id/etHeure"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="HH:MM"
-        android:inputType="time" />
+        android:hint="Heure (HH:mm)"
+        android:inputType="time"/>
 
-    <RecyclerView
-        android:id="@+id/recyclerViewSalons"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"/>
 
     <Button
         android:id="@+id/btnConfirmerRDV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Confirmer le RDV" />
+        android:text="Confirmer RDV"/>
+
+    <RecyclerView
+        android:id="@+id/recyclerViewSalons"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
 
 </LinearLayout>
