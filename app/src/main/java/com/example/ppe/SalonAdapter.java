@@ -10,6 +10,15 @@ import java.util.List;
 public class SalonAdapter extends RecyclerView.Adapter<SalonAdapter.SalonViewHolder> {
 
     private List<Salon> salonList;
+    private OnSalonClickListener listener;
+
+    public interface OnSalonClickListener {
+        void onSalonClick(int position);
+    }
+
+    public void setOnSalonClickListener(OnSalonClickListener listener) {
+        this.listener = listener;
+    }
 
     public SalonAdapter(List<Salon> salonList) {
         this.salonList = salonList;
@@ -18,7 +27,7 @@ public class SalonAdapter extends RecyclerView.Adapter<SalonAdapter.SalonViewHol
     @Override
     public SalonViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_salon, parent, false);
-        return new SalonViewHolder(view);
+        return new SalonViewHolder(view, listener);
     }
 
     @Override
@@ -36,11 +45,24 @@ public class SalonAdapter extends RecyclerView.Adapter<SalonAdapter.SalonViewHol
     public static class SalonViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
         TextView locationTextView;
+        TextView hoursTextView;
+        OnSalonClickListener listener;
 
-        public SalonViewHolder(View itemView) {
+        public SalonViewHolder(View itemView, OnSalonClickListener listener) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.salonName);
             locationTextView = itemView.findViewById(R.id.salonLocation);
+            hoursTextView = itemView.findViewById(R.id.salonHours);
+            this.listener = listener;
+
+            itemView.setOnClickListener(v -> {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onSalonClick(position);
+                    }
+                }
+            });
         }
     }
 }

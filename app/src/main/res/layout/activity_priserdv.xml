@@ -1,50 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".PriseRDVActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sélectionnez un coiffeur:"
+        android:labelFor="@+id/spinnerCoiffeur"
+        android:textSize="16sp" />
 
-    <Spinner
+    <AutoCompleteTextView
         android:id="@+id/spinnerCoiffeur"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Choisissez un coiffeur"/>
+        android:layout_marginTop="8dp"
+        android:hint="Nom du coiffeur" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Sélectionnez une prestation:"
+        android:labelFor="@+id/spinnerPrestation"
+        android:textSize="16sp" />
 
-    <Spinner
+    <AutoCompleteTextView
         android:id="@+id/spinnerPrestation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Choisissez une prestation"/>
+        android:layout_marginTop="8dp"
+        android:hint="Type de prestation" />
 
-
-    <EditText
-        android:id="@+id/etDate"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Date (dd/MM/yyyy)"
-        android:inputType="date"/>
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/etHeure"
-        android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Date:"
+            android:labelFor="@+id/etDate"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/etDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:focusable="false"
+            android:hint="JJ/MM/AAAA" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Heure:"
+            android:labelFor="@+id/etHeure"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/etHeure"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:focusable="false"
+            android:hint="HH:MM" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Heure (HH:mm)"
-        android:inputType="time"/>
+        android:layout_marginTop="16dp"
+        android:text="Salons disponibles:"
+        android:textSize="16sp" />
 
-
-    <Button
-        android:id="@+id/btnConfirmerRDV"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Confirmer RDV"/>
-
-    <RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSalons"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_marginTop="8dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/btnConfirmerRDV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:text="Confirmer le RDV" />
 
 </LinearLayout>

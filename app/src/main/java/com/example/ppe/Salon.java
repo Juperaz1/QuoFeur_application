@@ -13,12 +13,12 @@ public class Salon {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getLocation() {
         return location;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setLocation(String location) {

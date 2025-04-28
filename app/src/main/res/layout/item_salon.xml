@@ -1,24 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp"
     android:layout_marginBottom="8dp"
-    android:background="?android:attr/selectableItemBackground" >
+    android:background="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
 
     <TextView
         android:id="@+id/salonName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        tools:text="Salon de Coiffure"/>
 
     <TextView
         android:id="@+id/salonLocation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="14sp"
-        android:textColor="#757575"/>
+        android:textColor="#757575"
+        android:layout_marginTop="4dp"
+        tools:text="123 Rue de Paris, 75001"/>
 
+
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="#EEEEEE"
+        android:visibility="gone"/>
+
+
+    <TextView
+        android:id="@+id/salonHours"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="#757575"
+        android:layout_marginTop="8dp"
+        tools:text="Ouvert aujourd'hui: 9h-19h"
+        android:visibility="gone"/>
 </LinearLayout>

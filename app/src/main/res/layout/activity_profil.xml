@@ -14,7 +14,6 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="32dp"/>
 
-    <!-- Affichage du nom -->
     <TextView
         android:id="@+id/tvNom"
         android:layout_width="wrap_content"
@@ -22,7 +21,6 @@
         android:text="Nom : "
         android:textSize="18sp" />
 
-    <!-- Affichage du prénom -->
     <TextView
         android:id="@+id/tvPrenom"
         android:layout_width="wrap_content"
@@ -30,7 +28,6 @@
         android:text="Prénom : "
         android:textSize="18sp" />
 
-    <!-- Affichage des points -->
     <TextView
         android:id="@+id/tvPoints"
         android:layout_width="wrap_content"
@@ -38,7 +35,6 @@
         android:text="Points : "
         android:textSize="18sp" />
 
-    <!-- Affichage de l'historique -->
     <TextView
         android:id="@+id/tvHistorique"
         android:layout_width="wrap_content"

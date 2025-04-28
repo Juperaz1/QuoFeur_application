@@ -18,15 +18,9 @@ public class ProfilActivity extends AppCompatActivity {
         TextView tvHistorique = findViewById(R.id.tvHistorique);
 
 
-        String nom = "Dupont";
-        String prenom = "Jean";
-        String points = "150 points";
-        String historique = "Aucun historique";
-
-        // Afficher les informations dans les TextViews
-        tvNom.setText("Nom : " + nom);
-        tvPrenom.setText("Prénom : " + prenom);
-        tvPoints.setText("Points : " + points);
-        tvHistorique.setText("Historique : " + historique);
+        tvNom.setText("Nom : " + tvNom);
+        tvPrenom.setText("Prénom : " + tvPrenom);
+        tvPoints.setText("Points : " + tvPoints);
+        tvHistorique.setText("Historique : " + tvHistorique);
     }
 }
