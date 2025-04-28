@@ -2,6 +2,7 @@ package com.example.ppe;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent; // Import nécessaire pour Intent
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -25,7 +26,7 @@ public class PriseRDVActivity extends AppCompatActivity {
     private RecyclerView recyclerViewSalons;
     private SalonAdapter salonAdapter;
     private final Calendar calendar = Calendar.getInstance();
-    private List<Salon> salonList; // Declare salonList here
+    private List<Salon> salonList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,24 +46,27 @@ public class PriseRDVActivity extends AppCompatActivity {
 
         // Liste des salons
         salonList = new ArrayList<>();
-        salonList.add(new Salon("Salon 1", "Paris"));
-        salonList.add(new Salon("Salon 2", "Lyon"));
-        salonList.add(new Salon("Salon 3", "Marseille"));
+        salonList.add(new Salon("ERIC-STIPA", "7 Bd Heurteloup, 37000 Tours"));
+        salonList.add(new Salon("CARPY Coiffeur Coloriste", "20 Rue Nationale, 37000 Tours"));
+        salonList.add(new Salon("Addict Paris Coiffure", "21 Pl. Jean Jaurès, 37000 Tours"));
+        salonList.add(new Salon("Atomic Hair Coiffure Mixte", "13 Rue Georges Clemenceau, 41200 Romorantin-Lanthenay"));
+        salonList.add(new Salon("Lounge hair", "17 Rue du Président Wilson, 41200 Romorantin-Lanthenay"));
+        salonList.add(new Salon("Styl'hair by Océane", "12 Pl. de la Paix, 41200 Romorantin-Lanthenay"));
+
+
 
         salonAdapter = new SalonAdapter(salonList);
         recyclerViewSalons.setAdapter(salonAdapter);
 
-        // Set the click listener for the salon items
         salonAdapter.setOnSalonClickListener(position -> {
             Salon clickedSalon = salonList.get(position);
             Toast.makeText(PriseRDVActivity.this, "Salon sélectionné: " + clickedSalon.getName(), Toast.LENGTH_SHORT).show();
-            // Here you might want to store the selected salon and proceed with the RDV booking
+            // Ici, tu peux stocker le salon sélectionné si nécessaire pour la confirmation
         });
 
-        // Configuration des AutoCompleteTextView avec des données
         ArrayAdapter<String> coiffeurAdapter = new ArrayAdapter<>(this,
                 android.R.layout.simple_dropdown_item_1line,
-                new String[]{"Coiffeur 1", "Coiffeur 2", "Coiffeur 3"});
+                new String[]{"Mr FOUQUET Claude", "Mme MIME Isabelle", "Mme DISTO Catherine"});
         spinnerCoiffeur.setAdapter(coiffeurAdapter);
 
         ArrayAdapter<String> prestationAdapter = new ArrayAdapter<>(this,
@@ -70,33 +74,38 @@ public class PriseRDVActivity extends AppCompatActivity {
                 new String[]{"Prestation 1", "Prestation 2", "Prestation 3"});
         spinnerPrestation.setAdapter(prestationAdapter);
 
-        // Date picker
         etDate.setOnClickListener(v -> showDatePicker());
-
-        // Time picker
         etHeure.setOnClickListener(v -> showTimePicker());
 
-        // Listener du bouton Confirmer RDV
         btnConfirmerRDV.setOnClickListener(v -> {
-            // Récupérer les valeurs des champs
             String coiffeur = spinnerCoiffeur.getText().toString();
             String prestation = spinnerPrestation.getText().toString();
             String date = etDate.getText().toString();
             String heure = etHeure.getText().toString();
 
-            // Vérifier si les champs sont remplis
             if (coiffeur.isEmpty() || prestation.isEmpty() || date.isEmpty() || heure.isEmpty()) {
                 Toast.makeText(PriseRDVActivity.this, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show();
             } else {
-                // Vérification de la validité de la date et de l'heure
                 if (!isValidDate(date)) {
                     Toast.makeText(PriseRDVActivity.this, "Date invalide", Toast.LENGTH_SHORT).show();
                 } else if (!isValidTime(heure)) {
                     Toast.makeText(PriseRDVActivity.this, "Heure invalide", Toast.LENGTH_SHORT).show();
                 } else {
-                    // Affichage du message de confirmation
-                    Toast.makeText(PriseRDVActivity.this, "RDV confirmé avec " + coiffeur + " le " + date + " à " + heure, Toast.LENGTH_SHORT).show();
-                    // Here you would typically save the appointment details to a database or send them to a server.
+                    // Vérification de l'heure
+                    if (isTimeAfterClosing(heure)) {
+                        Toast.makeText(PriseRDVActivity.this, "Les réservations ne sont pas possibles après 19h.", Toast.LENGTH_SHORT).show();
+                    } else {
+                        // Créer un Intent pour démarrer l'activité de confirmation
+                        Intent confirmationIntent = new Intent(PriseRDVActivity.this, ConfirmationRDVActivity.class);
+
+                        // Passer les informations à l'activité de confirmation (facultatif)
+                        confirmationIntent.putExtra("coiffeur", coiffeur);
+                        confirmationIntent.putExtra("prestation", prestation);
+                        confirmationIntent.putExtra("date", date);
+                        confirmationIntent.putExtra("heure", heure);
+
+                        startActivity(confirmationIntent);
+                    }
                 }
             }
         });
@@ -136,5 +145,11 @@ public class PriseRDVActivity extends AppCompatActivity {
 
     private boolean isValidTime(String time) {
         return time.matches("\\d{2}:\\d{2}");
+    }
+
+    private boolean isTimeAfterClosing(String time) {
+        String[] parts = time.split(":");
+        int hour = Integer.parseInt(parts[0]);
+        return hour >= 19;
     }
 }
