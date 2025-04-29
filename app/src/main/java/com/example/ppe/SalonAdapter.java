@@ -1,5 +1,6 @@
 package com.example.ppe;
 
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 public class SalonAdapter extends RecyclerView.Adapter<SalonAdapter.SalonViewHolder> {
-
     private List<Salon> salonList;
     private OnSalonClickListener listener;
+    private int selectedPosition = -1;
 
     public interface OnSalonClickListener {
         void onSalonClick(int position);
@@ -35,6 +36,10 @@ public class SalonAdapter extends RecyclerView.Adapter<SalonAdapter.SalonViewHol
         Salon salon = salonList.get(position);
         holder.nameTextView.setText(salon.getName());
         holder.locationTextView.setText(salon.getLocation());
+
+        // Mise en forme selon la sélection
+        holder.itemView.setBackgroundColor(position == selectedPosition ?
+                Color.LTGRAY : Color.TRANSPARENT);
     }
 
     @Override
@@ -45,14 +50,12 @@ public class SalonAdapter extends RecyclerView.Adapter<SalonAdapter.SalonViewHol
     public static class SalonViewHolder extends RecyclerView.ViewHolder {
         TextView nameTextView;
         TextView locationTextView;
-        TextView hoursTextView;
         OnSalonClickListener listener;
 
         public SalonViewHolder(View itemView, OnSalonClickListener listener) {
             super(itemView);
             nameTextView = itemView.findViewById(R.id.salonName);
             locationTextView = itemView.findViewById(R.id.salonLocation);
-            hoursTextView = itemView.findViewById(R.id.salonHours);
             this.listener = listener;
 
             itemView.setOnClickListener(v -> {

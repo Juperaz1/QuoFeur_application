@@ -41,6 +41,12 @@
             android:name=".PriseRDVActivity"
             android:exported="true" />
 
+        <activity android:name=".ChoixCoiffeurActivity"
+            android:exported="true" />
+
+        <activity android:name=".ConfirmationRDVActivity"
+            android:exported="true" />
+
     </application>
 
 </manifest>
