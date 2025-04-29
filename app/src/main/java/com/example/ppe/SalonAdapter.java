@@ -37,7 +37,6 @@ public class SalonAdapter extends RecyclerView.Adapter<SalonAdapter.SalonViewHol
         holder.nameTextView.setText(salon.getName());
         holder.locationTextView.setText(salon.getLocation());
 
-        // Mise en forme selon la sélection
         holder.itemView.setBackgroundColor(position == selectedPosition ?
                 Color.LTGRAY : Color.TRANSPARENT);
     }
@@ -63,6 +62,8 @@ public class SalonAdapter extends RecyclerView.Adapter<SalonAdapter.SalonViewHol
                     int position = getAdapterPosition();
                     if (position != RecyclerView.NO_POSITION) {
                         listener.onSalonClick(position);
+
+
                     }
                 }
             });

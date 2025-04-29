@@ -6,14 +6,15 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+
     <TextView
-        android:id="@+id/textViewTitle"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="18sp"
+        android:text="Nos coiffeurs"
+        android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="16dp"
-        tools:text="Coiffeurs disponibles chez [Salon]"/>
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="32dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewCoiffeurs"

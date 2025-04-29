@@ -34,13 +34,19 @@ public class PriseRDVActivity extends AppCompatActivity {
         btnConfirmerRDV = findViewById(R.id.btnSuivant);
         btnConfirmerRDV.setEnabled(false);
 
-        // Initialisation de la liste des salons
+
         salonList = new ArrayList<>();
         salonList.add(new Salon("ERIC-STIPA", "7 Bd Heurteloup, 37000 Tours"));
+        salonList.add(new Salon("De Meche Avec Vous", "107 Rue Lakanal, 37000 Tours"));
         salonList.add(new Salon("CARPY Coiffeur Coloriste", "20 Rue Nationale, 37000 Tours"));
-        // ... autres salons
+        salonList.add(new Salon("Coiff&Co","5 Pl. Neuve, 37000 Tours"));
+        salonList.add(new Salon("Le coiffeur de monsieur","82 Rue Georges Clemenceau, 41200 Romorantin-Lanthenay"));
+        salonList.add(new Salon("Elle & Lui", "39 bis Fbg d'Orléans, 41200 Romorantin-Lanthenay"));
+        salonList.add(new Salon("MD Coiff", "4 Pl. de la Paix, 41200 Romorantin-Lanthenay"));
+        salonList.add(new Salon("Lounge hair", "17 Rue du Président Wilson, 41200 Romorantin-Lanthenay"));
+        salonList.add(new Salon("Philippe Friaud Coiffure", "12 Rue Georges Clemenceau, 41200 Romorantin-Lanthenay"));
 
-        // Configuration du RecyclerView
+
         recyclerViewSalons.setLayoutManager(new LinearLayoutManager(this));
         salonAdapter = new SalonAdapter(salonList);
         recyclerViewSalons.setAdapter(salonAdapter);
@@ -49,7 +55,6 @@ public class PriseRDVActivity extends AppCompatActivity {
             Salon selectedSalon = salonList.get(position);
             btnConfirmerRDV.setEnabled(true);
 
-            // Stocker le salon sélectionné pour le passer à l'activité suivante
             btnConfirmerRDV.setOnClickListener(v -> {
                 Intent intent = new Intent(PriseRDVActivity.this, ChoixCoiffeurActivity.class);
                 intent.putExtra("selectedSalonName", selectedSalon.getName());

@@ -7,9 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
-
-
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -54,21 +51,17 @@ public class CoiffeurAdapter extends RecyclerView.Adapter<CoiffeurAdapter.Coiffe
 
     static class CoiffeurViewHolder extends RecyclerView.ViewHolder {
         private TextView nomPrenom;
-        private TextView specialite;
         private View itemView;
 
         public CoiffeurViewHolder(@NonNull View itemView) {
             super(itemView);
             this.itemView = itemView;
             nomPrenom = itemView.findViewById(R.id.tv_nom_prenom);
-            specialite = itemView.findViewById(R.id.tv_specialite);
         }
 
         public void bind(Coiffeur coiffeur, boolean isSelected) {
             nomPrenom.setText(coiffeur.getPrenom() + " " + coiffeur.getNom());
-            specialite.setText(coiffeur.getSpecialite());
 
-            // Changer la couleur de fond si sélectionné
             itemView.setBackgroundColor(isSelected ?
                     Color.LTGRAY : Color.TRANSPARENT);
         }
