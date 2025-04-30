@@ -3,22 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center">
+    android:padding="16dp">
 
     <TextView
         android:id="@+id/confirmationMessage"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:textSize="18sp"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="32dp"
+        android:text="Votre rendez-vous est confirmé !" />
 
     <Button
         android:id="@+id/btnRetour"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Retour à l'accueil"
         android:layout_marginTop="32dp"
-        android:text="Retour à l'accueil"/>
+        android:layout_gravity="center_horizontal" />
 
 </LinearLayout>

@@ -5,17 +5,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import androidx.recyclerview.widget.RecyclerView;
-import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import java.util.List;
 
 public class CoiffeurAdapter extends RecyclerView.Adapter<CoiffeurAdapter.CoiffeurViewHolder> {
     private List<Coiffeur> coiffeurs;
     private int selectedPosition = -1;
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(Coiffeur coiffeur);
+    }
 
     public CoiffeurAdapter(List<Coiffeur> coiffeurs) {
         this.coiffeurs = coiffeurs;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     @NonNull
@@ -29,11 +37,17 @@ public class CoiffeurAdapter extends RecyclerView.Adapter<CoiffeurAdapter.Coiffe
     @Override
     public void onBindViewHolder(@NonNull CoiffeurViewHolder holder, int position) {
         Coiffeur coiffeur = coiffeurs.get(position);
-        holder.bind(coiffeur, position == selectedPosition);
+        holder.bind(coiffeur);
+        holder.itemView.setBackgroundColor(position == selectedPosition ? Color.LTGRAY : Color.TRANSPARENT);
 
         holder.itemView.setOnClickListener(v -> {
-            selectedPosition = position;
-            notifyDataSetChanged();
+            int previousSelectedPosition = selectedPosition;
+            selectedPosition = holder.getAdapterPosition();
+            notifyItemChanged(previousSelectedPosition);
+            notifyItemChanged(selectedPosition);
+            if (listener != null && selectedPosition != RecyclerView.NO_POSITION) {
+                listener.onItemClick(coiffeurs.get(selectedPosition));
+            }
         });
     }
 
@@ -51,19 +65,14 @@ public class CoiffeurAdapter extends RecyclerView.Adapter<CoiffeurAdapter.Coiffe
 
     static class CoiffeurViewHolder extends RecyclerView.ViewHolder {
         private TextView nomPrenom;
-        private View itemView;
 
         public CoiffeurViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.itemView = itemView;
             nomPrenom = itemView.findViewById(R.id.tv_nom_prenom);
         }
 
-        public void bind(Coiffeur coiffeur, boolean isSelected) {
+        public void bind(Coiffeur coiffeur) {
             nomPrenom.setText(coiffeur.getPrenom() + " " + coiffeur.getNom());
-
-            itemView.setBackgroundColor(isSelected ?
-                    Color.LTGRAY : Color.TRANSPARENT);
         }
     }
 }

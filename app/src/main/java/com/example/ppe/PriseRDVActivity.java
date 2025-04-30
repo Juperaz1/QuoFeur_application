@@ -1,29 +1,22 @@
 package com.example.ppe;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.TimePicker;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class PriseRDVActivity extends AppCompatActivity {
     private RecyclerView recyclerViewSalons;
     private SalonAdapter salonAdapter;
     private List<Salon> salonList;
-    private Button btnConfirmerRDV;
+    private Button btnSuivant;
+    private Salon salonSelectionne; // Nouvelle variable pour stocker le salon sélectionné
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +24,8 @@ public class PriseRDVActivity extends AppCompatActivity {
         setContentView(R.layout.activity_priserdv);
 
         recyclerViewSalons = findViewById(R.id.recyclerViewSalons);
-        btnConfirmerRDV = findViewById(R.id.btnSuivant);
-        btnConfirmerRDV.setEnabled(false);
-
+        btnSuivant = findViewById(R.id.btnSuivant);
+        btnSuivant.setEnabled(false);
 
         salonList = new ArrayList<>();
         salonList.add(new Salon("ERIC-STIPA", "7 Bd Heurteloup, 37000 Tours"));
@@ -46,21 +38,25 @@ public class PriseRDVActivity extends AppCompatActivity {
         salonList.add(new Salon("Lounge hair", "17 Rue du Président Wilson, 41200 Romorantin-Lanthenay"));
         salonList.add(new Salon("Philippe Friaud Coiffure", "12 Rue Georges Clemenceau, 41200 Romorantin-Lanthenay"));
 
-
         recyclerViewSalons.setLayoutManager(new LinearLayoutManager(this));
         salonAdapter = new SalonAdapter(salonList);
         recyclerViewSalons.setAdapter(salonAdapter);
 
         salonAdapter.setOnSalonClickListener(position -> {
-            Salon selectedSalon = salonList.get(position);
-            btnConfirmerRDV.setEnabled(true);
+            salonSelectionne = salonList.get(position); // Mettre à jour le salon sélectionné
+            btnSuivant.setEnabled(true); // Activer le bouton une fois qu'un salon est sélectionné
+        });
 
-            btnConfirmerRDV.setOnClickListener(v -> {
+        // Configurer l'OnClickListener du bouton "Suivant" une seule fois
+        btnSuivant.setOnClickListener(v -> {
+            if (salonSelectionne != null) {
                 Intent intent = new Intent(PriseRDVActivity.this, ChoixCoiffeurActivity.class);
-                intent.putExtra("selectedSalonName", selectedSalon.getName());
-                intent.putExtra("selectedSalonAddress", selectedSalon.getLocation());
+                intent.putExtra("selectedSalonName", salonSelectionne.getName());
+                intent.putExtra("selectedSalonAddress", salonSelectionne.getLocation());
                 startActivity(intent);
-            });
+            } else {
+                Toast.makeText(PriseRDVActivity.this, "Veuillez sélectionner un salon", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 }
