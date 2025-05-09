@@ -49,7 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
                 if (message.equals("Utilisateur authentifié avec succès")) {
                     SharedPreferences prefs = getSharedPreferences("app", MODE_PRIVATE);
-                    prefs.edit().putString("jwt", token).putInt("user_id", userId).apply();
+                    prefs.edit()
+                            .putString("jwt", token)
+                            .putInt("user_id", userId) // Stockage de l'ID de l'utilisateur
+                            .apply();
 
                     Intent intent = new Intent(MainActivity.this, MenuActivity.class);
                     startActivity(intent);
@@ -58,8 +61,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Le login a échoué", Toast.LENGTH_SHORT).show();
                 }
             } catch (JSONException e) {
-                Toast.makeText(getApplicationContext(), "Erreur de parsing JSON", Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Erreur de parsing JSON: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                e.printStackTrace(); // Important pour le débogage
             }
         }, error -> {
             error.printStackTrace();

@@ -35,7 +35,7 @@ public class ConfirmationRDVActivity extends AppCompatActivity {
 
 
         btnRetour.setOnClickListener(v -> {
-            Intent intent = new Intent(ConfirmationRDVActivity.this, MainActivity.class);
+            Intent intent = new Intent(ConfirmationRDVActivity.this, MenuActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(intent);
             finish();
